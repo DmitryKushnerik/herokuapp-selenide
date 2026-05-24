@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.Color;
 
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -13,11 +14,13 @@ public class AddRemovePage extends BasePage {
     final String borderColor = Color.fromString("#2284a1").asRgb();
     final String textColor = Color.fromString("white").asRgba();
 
+    @Step("Открыть страницу")
     public AddRemovePage openPage() {
         open("add_remove_elements/");
         return this;
     }
 
+    @Step("Проверить, что кнопка отображается корректно")
     public void getButtonAttributes(String selector, String text) {
         $x(selector)
                 .shouldHave(cssValue("background-color", bgColor))
@@ -27,6 +30,7 @@ public class AddRemovePage extends BasePage {
 
     }
 
+    @Step("Проверить, что заголовок страницы отображается корректно")
     public AddRemovePage getTitleCorrect() {
         $(pageTitle)
                 .should(exist)
@@ -35,17 +39,21 @@ public class AddRemovePage extends BasePage {
         return this;
     }
 
+    @Step("Проверить, что кнопка Add отображается корректно")
     public AddRemovePage getAddButtonCorrect() {
         $x(addButton).should(exist).shouldBe(visible);
         getButtonAttributes(addButton, "Add Element");
         return this;
     }
 
+    @Step("Проверить, что кнопка Delete отображается корректно")
     public AddRemovePage getDeleteButtonCorrect() {
         $x(deleteButton).should(exist).shouldBe(visible);
         getButtonAttributes(deleteButton, "Delete");
         return this;
     }
+
+    @Step("Нажать на кнопку Add")
 
     public AddRemovePage addButtonClick(int num) {
         for (int i = 0; i < num; i++)
@@ -53,12 +61,14 @@ public class AddRemovePage extends BasePage {
         return this;
     }
 
+    @Step("Нажать на кнопку Delete")
     public AddRemovePage deleteButtonClick(int num) {
         for (int i = 0; i < num; i++)
             $x(deleteButton).click();
         return this;
     }
 
+    @Step("Получить количество кнопок Delete")
     public AddRemovePage getDeleteButtonNumber(int num) {
         $$x(deleteButton).shouldHave(size(num));
         return this;

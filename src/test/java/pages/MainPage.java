@@ -1,5 +1,7 @@
 package pages;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Configuration.baseUrl;
@@ -16,21 +18,25 @@ public class MainPage extends BasePage {
     final String forkLink = "//a[@href='https://github.com/tourdedave/the-internet']";
     final String forkImage = "img";
 
+    @Step("Открыть страницу")
     public MainPage openPage() {
         open("");
         return this;
     }
 
+    @Step("Проверить корректность URL")
     public MainPage getUrlIsCorect(String url) {
         webdriver().shouldHave(url(baseUrl + url));
         return this;
     }
 
+    @Step("Перейти по ссылке с указанным текстом")
     public MainPage openLinkByText(String text) {
         $x(LINK_PATTERN.formatted(text)).click();
         return this;
     }
 
+    @Step("Проверить, что заголовок отображается корректно")
     public MainPage getTitleCorrect() {
         $(header1)
                 .should(exist)
@@ -39,6 +45,7 @@ public class MainPage extends BasePage {
         return this;
     }
 
+    @Step("Проверить, что подзаголовок отображается корректно")
     public MainPage getSubtitleCorrect() {
         $(header2)
                 .should(exist)
@@ -47,6 +54,7 @@ public class MainPage extends BasePage {
         return this;
     }
 
+    @Step("Проверить, что список ссылок отображается корректно")
     public MainPage getLinkListCorrect() {
         $(linkList)
                 .should(exist)
@@ -56,6 +64,7 @@ public class MainPage extends BasePage {
         return this;
     }
 
+    @Step("Проверить, что подвал страницы отображается корректно")
     public MainPage getFooterCorrect() {
         $(footer)
                 .should(exist)
@@ -63,12 +72,14 @@ public class MainPage extends BasePage {
         return this;
     }
 
+    @Step("Проверить, что ссылка Fork корректна")
     public MainPage getForkLinkCorrect() {
         $x(forkLink)
                 .should(exist);
         return this;
     }
 
+    @Step("Проверить, что изображение в ссылке Fork корректно")
     public MainPage getForkImageCorrect() {
         $(forkImage)
                 .should(exist)

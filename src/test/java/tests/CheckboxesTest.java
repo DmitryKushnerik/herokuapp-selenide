@@ -1,8 +1,16 @@
 package tests;
 
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
+@Owner("Кушнерик Дмитрий")
+@Epic("Страница Checkboxes")
+@TmsLink("herokuapp-selenide")
+@Issue("issues")
 public class CheckboxesTest extends BaseTest {
+    @Feature("Доступность страницы Checkboxes")
+    @Story("Переход на страницу Checkboxes по ссылке с главной страницы")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(description = "Проверка открытия страницы по ссылке с главной страницы")
     public void checkIsLinkCorrect() {
         mainPage
@@ -11,6 +19,9 @@ public class CheckboxesTest extends BaseTest {
                 .getUrlIsCorect("checkboxes");
     }
 
+    @Feature("Доступность страницы Checkboxes")
+    @Story("Проверка корректности отображения страницы")
+    @Severity(SeverityLevel.BLOCKER)
     @Test(description = "Проверка корректности отображения страницы", priority = 1)
     public void checkIsPageCorrect() {
         checkboxesPage
@@ -21,7 +32,10 @@ public class CheckboxesTest extends BaseTest {
                 .getCheckboxChecked(1, true);
     }
 
-    @Test(description = "Проверка работоспособности чекбоксов", priority = 2)
+    @Feature("Работоспособность элементов страницы")
+    @Story("Проверка работоспособности флажков")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(description = "Проверка работоспособности флажков", priority = 2)
     public void checkIsCheckboxesClickable() {
         checkboxesPage
                 .openPage()

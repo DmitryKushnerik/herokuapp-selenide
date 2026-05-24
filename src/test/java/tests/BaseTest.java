@@ -1,6 +1,7 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import io.qameta.allure.Step;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
@@ -16,11 +17,12 @@ public class BaseTest {
     public ContextMenuPage contextMenuPage;
     public DragAndDropPage dragAndDropPage;
 
+    @Step("Открыть браузер")
     @BeforeMethod
     public void setup() {
         Configuration.browser = "Chrome";
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = false;
+        Configuration.headless = true;
         Configuration.timeout = 10000;
         Configuration.baseUrl = "https://the-internet.herokuapp.com/";
 
@@ -32,6 +34,7 @@ public class BaseTest {
         dragAndDropPage = new DragAndDropPage();
     }
 
+    @Step("Закрыть браузер")
     @AfterMethod
     public void close() {
         clearBrowserCache();
